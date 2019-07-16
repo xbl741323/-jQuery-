@@ -1,0 +1,193 @@
+获取元素节点：
+document.getElementById();（获取对应id名的节点）
+document.getElementsByTagName();（获取多个标签节点）
+document.getElementsByName();（获取多个节点的name属性值节点）
+document.getElementsByClassName();(获取多个对应class名的节点)（不支持Ie8及以下浏览器）
+
+一次性加载所有javascript函数
+window.onload = function(){}
+
+获得元素节点的属性值：
+innerHTML(获取对应节点的文本内容)
+innerText(它和innerHTML作用相似，不同的是它会将html标签去除)
+id（获取对应节点的id值）
+name（获取对应节点的name值）
+value（获取对应节点的value标签属性值）
+className（获取对应节点的class标签名）
+
+
+获取元素节点的子节点：
+childNodes
+-属性：表示当前节点的所有子节点
+firstChild
+-属性：表示当前节点的第一个子节点
+lastChild
+-属性：表示当前节点的最后一个子节点
+children
+-属性：返回当前元素的所有子元素（注意子节点和子元素的区别，子节点包括空白文本节点）
+firstElementChild
+-属性：表示当前节点的第一个元素节点
+lastElementChild
+-属性：表示当前节点的最后一个元素节点
+
+
+获取父节点和兄弟节点
+parentNode
+-属性：表示当前节点的父节点
+previousSibling  (包含空格节点)
+-属性：表示当前节点的前一个兄弟节点
+nextSibling（包含空格节点）
+-属性：表示当前节点的后一个兄弟节点
+previousElementSibling（IE8及以下不支持）
+-属性：表示当前节点的前一个兄弟元素节点
+nextElementSibling
+-属性：表示当前节点的后一个兄弟元素节点
+
+dom剩余查询
+var body = document.body;
+var html = document.documentElement;
+var all = document.all;
+document.querySelector()
+需要一个选择器的字符串作为参数，可以根据css选择器来查询一个元素节点对象（Jquery）
+（使用该方法总会返回唯一的一个元素，如果满足条件的元素有多个，那么只会返回第一个元素）
+document.querySelectorAll()
+(该方法和上面那个一样，不过结果返回一个数组，即使符合条件的元素的只有一个)
+
+常用DOM对象方法
+appendChild();
+removeChild();
+replaceChild();
+insertBefore();
+createElement();
+
+用DOM操作 css
+语法（修改样式值）：元素.style.样式名 = 样式值；
+类似于background-color这样的要采用驼峰原则调用才行
+我们通过style属性设置的样式都是内敛样式，内联样式具有较高的优先级，所以通过js修改的样式往往会立即显示
+不过加了！important的样式属性值不会改变
+注意：通过Style设置和查询的样式属性都是内联样式，无法读取css样式表中的样式
+
+获取元素当前显示的样式
+语法规则：元素.currentStyle.样式名(该方法只适用于IE浏览器,没什么卵用)
+其他浏览器中使用getComputedStyle()这个方法来读取元素的样式
+使用方法：var t2 = getComputedStyle(t1,null);（t1为需要获取样式属性值的对象）
+alert(t2.样式);
+
+
+clientWidth（只读属性不能改）
+clientHeight
+这两个属性可以获取元素的可见宽度和高度(包含内容区和内边距但不包含border宽度)，不带px可以用于计算
+offsetWidth
+offsetHeight
+可以获取元素整个的大小包括border
+offsetParent(用于获取最近的开启了定位（relative，fixed,absolute）的父元素)
+offsetLeft（当前元素相对于定位父元素的水平偏移量）
+offsetTop（当前元素相对于定位父元素的垂直偏移量）
+scrollHeight(获取元素的滚动高度)
+scrollWidth(获取元素的滚动宽度)
+scrollLeft（获取元素相对于父亲定位元素水平滚动的距离）
+scrollTop（获取元素相对于父亲定位元素垂直滚动的距离）
+当满足scrollHeight-scrollTop = clientHeight时表示滚动到底
+
+
+onmousemove()方法鼠标放上去触发
+clientX(区域里的x坐标)
+clientY(区域里的y坐标)
+
+pageX(可以获取鼠标相对于当前页面的x坐标)(IE8里面不兼容)
+pageY(可以获取鼠标相对于当前页面的y坐标)
+
+事件的冒泡指的就是事件的传导，当后代事件被触发时，其祖先元素的相同事件也会被触发（大部分的冒泡都是有用的）
+相同时间指的是都是onclick，或者都是onmousemove
+event.cancelBubble = true;可用于取消冒泡
+
+事件的委派指将事件统一绑定给元素的共同的祖先元素，这样当后代元素的事件触发时 ，会一直冒泡到祖先元素，从而通过祖先元素的
+响应函数来处理事件
+事件的委派利用了事件的冒泡，通过委派减少了事件绑定的次数，从而提高程序的性能
+
+使用对象.事件= 函数的形式绑定响应函数，它只能同时为一个元素的事件绑定一个响应函数，不能绑定多个，如果绑定了多个，后面的会覆盖前面的
+为了解决这个问题引入了addEventListener()通过这个方法也可以为元素绑定响应函数
+参数：1、事件的字符串，不要on,btn01.addEventListener("click");
+2、回调函数，当事件触发时该函数会被调用
+3、是否在捕获阶段触发事件，需要一个布尔值，一般都传false
+btn01.addEventListener("click",function(){},false);
+使用addEventListener()可以同时为一个元素的相同事件同时绑定多个响应函数，这样事件被触发时，响应函数会按照函数的绑定顺序执行
+（这个方法不支持Ie8及以下浏览器）
+attachEvent()
+在Ie8中使用attachEvent来绑定事件
+参数：1、时间的字符串，要on
+2、回调函数
+btn.attachEvent("onclick",function(){});不过它是后绑定先执行
+为了兼顾浏览器的兼容性问题，我们自己定义一个函数，用来指定元素绑定响应函数
+addEveneListener()中的this是绑定事件的对象
+attachEvent()中的htis,是window
+需要统一两个方法的this
+
+参数：
+obj：要绑定事件的对象
+eventStr：事件的字符串(不要on)
+callback：回调函数
+function bind(dbj,eventStr,callback){};
+
+事件的传播
+
+setCapture(); 只适用于Ie,火狐中调用时不会报错，但是使用chrome会报错     
+
+onmousewheel()鼠标滚轮滚动事件（火狐不支持该属性）
+火狐中用DOMMouseScroll来绑定滚动事件
+event.wheelDelta可以获得鼠标滚动的方向，向上为正，向下为负(火狐中不支持)
+火狐中使用event.detail获得鼠标活动的方向，向上为负，向下为正
+return false;可以清除默认样式（火狐中使用addEventListener()方法来绑定响应函数，取消默认样式不能使用return false，要使用
+event.preventDefault()(不过Ie8中不支持这个方法)）
+
+onkeydown（按键被按下）（按着不放会一直触发）
+当onkeydown连续触发时，第一次和第二次之间会间隔时间稍微长一点，其他的会非常快，这种设计是为了防止误操作的发生
+onkeyup（按键被松开）
+keyCode可以用来获取案件的编码，从而判断哪个按键被按下
+除了keyCode外，事件对象中还提供了几个属性
+altKey
+ctrlKey
+shiftKey
+来判断alt,ctrl.shift，是否被按下，按下则返回true,否则返回false
+在文本框中输入内容，属于onkeydown的默认行为，如果用return false 取消了默认行为，则输入的内容，不会出现在文本框中
+键盘事件一般绑定给可以获得焦点的对象（input标签）或者是document（绑定给div没有什么意义）
+
+DOM是通过js来操作网页的
+BOM是通过js来操作浏览器的
+在BOM中提供了一组对象，用来完成对浏览器的操作
+BOM对象：（这些BOM对象用的时候是小写）
+Window
+    - 代表的是整个浏览器的窗口，同时window也是网页中的全局对象
+Navigator
+    - 代表的是当前浏览器的信息，通过该对象可以识别不同的浏览器
+Location
+    - 代表的是当前浏览器的地址栏信息。通过它可以获取地址栏信息，或者操作浏览器跳转页面
+    - 如果直接将location属性改为一个完整的路径，或相对路径，则我们的页面会自动跳转到该路径，并且会生成相应的历史纪录
+History
+    - 代表的是浏览器的历史记录，可以通过该对象操作浏览器的历史记录（由于隐私的的原因，不能获取到具体的历史纪录，只能操作浏览器向前或向后翻页，而且该操作只在当次访问时有效）
+Screen（用的不多 ）
+    - 代表用户的屏幕的信息，通过该对象可以获取到用户的显示器的相关信息
+这些BOM对象在浏览器中都是作为window对象的属性保存的，可以通过window对象使用，也可以直接使用
+
+定时调用
+如果希望一段程序每间隔一段时间调用一次，可以使用定时调用的方法setInterval()
+setInterval()可以将一个函数每隔一段时间调用一次
+参数：
+     1、回调函数，该函数会每隔一段时间调用一次
+     2、每次调用间隔的时间，单位是毫秒,1000毫秒是一秒
+setInterval(function(){},1000);
+返回值：
+     返回一个Number类型的数据
+     这个数字用来作为定时器的唯一标识
+clearInterval()可以用来关闭定时器，方法中许需要一个定时器的标识作为参数，这样将关闭标识对应的定时器
+
+做图片切换练习时，我们每点击一次开始，就会开启一个定时器，点击多次就会开启多个定时器，切换时间变为1/n毫秒，这会导致图片的切换速度过快，并且我们只能关闭最后一次开启的定时器，所以开启定时器之前，我们需要将当前元素上的其他定时器关闭
+
+setTimeout()延时调用，隔一段时间调用，而且只执行一次
+clearTimeout()关闭延时调用
+延时调用和定时调用是可以同时调用的，在开发中可以根据自己的需要去选择
+
+类的操作（通过改变类名）
+1、t1.className ="t2"（直接用t2覆盖t1）
+2、t2.className += "t2";（在t1的基础上增加t2）
+opacity->设置半透明

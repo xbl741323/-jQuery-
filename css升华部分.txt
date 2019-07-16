@@ -1,0 +1,193 @@
+一、超级链接a的修饰
+html结构：超级链接a
+<a href="https://www.bilibili.com/" target=_blank>超级链接</a>
+1、a的四个状态（四个伪类）
+a标签与别的标签不同，它有自己的四个显示状态，可以设置不同的显示样式。
+                                    a:link{
+		    	color: blue;//链接没点击前的颜色
+		    }
+		    a:visited{
+		    	color: red;//链接点击之后的颜色
+		    }
+		    a:hover{
+		    	color: black;//鼠标放到链接上时的颜色
+		    }
+		    a:active{
+		    	color: yellow;//鼠标右键按着不动时的颜色
+		    }
+这四个状态是根据我们用户的动作产生变化的。如果动作没发生，这些对应的样式不会加载。
+2、a标签的伪类书写顺序
+a的四个伪类都有自己的权重，权重相同，根据书写顺序不同，会有层叠效果。
+visited 会层叠 hover 和 active
+a的四个状态必须按顺序书写：link、visited、hover、active。
+爱恨准则：love hate。
+3、实际应用
+a标签是一个行内标签，不能设置宽高。
+a标签的一部分文本属性不能继承父级。color、text-decoration。只能单独设置。
+a标签的四个属性：实际工作中link和visited一般一起设置，属性值保持一致。hover单独设置，active一般不设置。
+a:link,a:visited{
+         color:blue;
+         text-decroation:none;
+        }
+a:hover{
+         color:red;
+         text-decroation:underline;
+
+       }
+实际工作中：文本的默认样式里，除了color和text-decoration，其他的文本样式都可以靠继承，或者直接写在a选择器，默认样式可以给四个状态都设置成一样的，谁发生变化，单独设置这个伪类。
+
+二、background背景
+background是一个复合属性。
+1、background-color背景色
+渲染位置：border及以内。
+属性值：十六进制、rgb、rgba、颜色名。
+background-color：blue;
+2、background-image
+实际宣布位置：跟背景色一样，能看到的其实就是border以内。
+属性值：url(图片路径)
+添加的背景图片会铺满整个盒子的背景区域。
+url：uniform resourcelocator。统一资源定位符，实际就是背景图片的来源。
+url内部的值：图片的路径，可以是相对路径，也可以是绝对路径。
+background-image: url("https://i0.hdslb.com/bfs/archive/c2804b7823fc9092b56c30225fedfa0dc0833114.png");
+背景图和背景色的压盖顺序：image压盖颜色。
+3、background-repeat背景重复
+设置背景以什么方式进行重复。
+属性值:
+    repeat        默认值，整个背景区域重复
+    no-repeat   不重复
+    repeat-x     水反方向重复
+    repeat-y     垂直方向重复
+
+ repeat-x  的妙用：制作一个渐变背景的导航栏。
+给盒子添加一个背景图，水平方向1像素，垂直方向就是正常高度，让背景图，水平重复铺开。
+4、background-position背景图位置
+作用：规定我们插入的背景图在盒子的位置。
+属性值：像素表示法、单词表示法，百分比表示法
+a、像素表示法：
+background-position: 100px 100px;
+属性值有两个，都用像素表示。
+第一个属性值：背景图片左上角距离盒子背景区域左上角（border以内）的水平偏移量。
+第二个属性值：背景图片左上角距离盒子背景区域左上角（border以内）的垂直偏移量。
+位置的属性值分正负。正方向：向右下移动；负方向：向左上移动；指的是图片针对（0,0）点移动的方向。
+    css精灵图技术：很多元素都有背景图，需要有实际存在的图片，这就需要发送多个http请求下载图片，网页加载速度会变慢，为了解决这个问题，由此出现css精灵图技术，即将多个小的背景图放在一张图片上，谁用背景图加载的都是一张图片。
+用法：给一个合适的盒子大小，通过背景图定位找到图片的位置。
+b、单词表示法
+   图片位置水平和垂直方向用代表方向的单词表示
+水平方向，第一个属性值：left，center、right。背景在盒子内部居左、居中、居右、
+垂直方向，第二个属性值：top，center、bottom。背景在盒子内部居上、居中、居下、background-position: center top;
+c、百分比表示法（不常用）
+关注：百分比参考依据
+
+background-position: 50% 50%;
+5、background-attachment背景附着
+指的是背景是否随着页面滚动而滚动。
+属性值：
+scroll      滚动，背景图会随着页面滚动而滚走。
+fixed       固定，背景图不会随着页面滚动而滚走。
+background-attachment: fixed;
+6、background复合属性
+ background: url(https://yys.res.netease.com/pc/gw/20180913151832/img/banner_4340f19.jpg) no-repeat center top fixed white;
+五个属性之间的顺序可以更换，position的两个属性位置不能换。
+
+三、背景实际应用
+1、padding挤出背景效果
+方法：给盒子用padding-left留出一个空白区域，添加一个合适的背景图，不重复。
+2、文字换图片
+提高搜索引擎优化：搜索时都是搜索文字。
+h1标签内部放的是logo的图片，logo不用插入图，换成背景图，内部放置的简单的关键字。
+                               a{
+		   	display: block;
+		   	background-image: url(images/logobilibili.png);
+		   	background-position: center center; 
+		   	background-repeat: no-repeat;
+		   	text-decoration:none;
+		   	text-indent: -99999px;
+		   }
+四、定位
+css布局:盒模型、浮动、定位，这些就是最重要的布局属性。
+辅助功能属性：文本、a、背景等等，为了让网页更加美观。
+定位：相对定位、绝对定位、固定定位。
+脱标（脱离标准流）：浮动、绝对定位、固定浮动。
+
+1、相对定位
+定位：元素位置相对于一个参考物进行的位置的偏移。
+相对定位：元素相对于自身进行的位置的偏移。
+position：定位属性。                             
+属性值：relative。相对的。
+偏移的数据量。有其他属性来控制，方向属性，left、right、top、bottom。
+                                         position: relative;
+		    	left:100px;
+		    	top:10px;
+		    	/*right: 10px;
+		    	bottom: 10px;*/
+偏移方向判断:如果属性值为正，偏移方向和属性方向相反。
+left:-100px;    向左移动100px;
+特点：显示的位置是偏移后的位置，原位置还保留，没有被其他元素占有，形影分离。
+相对定位不会让元素脱离标准流，标准流的位置还是自己的。
+用途不是很多，也有自己的特殊用途。
+a、结构比较稳固，经常拿来做绝对定位的参考元素，子绝父相。
+b、微调。
+top:-100px;    向上移动100px;
+
+2、绝对定位
+绝对定位的定位参考元素不固定，但是不是本身。
+属性值：absolute。绝对的
+也有四个方向的偏移量：left、right、top、bottom
+                 position: absolute;
+	 top:110px;
+	 left: 100px;
+特点：与相对定位比较，元素绝对定位之后，会脱离标准流，标准流的位置让给了后面的元素。
+绝对定位的元素根据选取偏移方向不同，参考点也不同。
+a、参考元素为body时的参考点是页面的四个角，具体哪个角根据所加属性方向决定。
+（这里的body指页面首屏）
+top:110px;
+left: 100px;      参考点为左上角
+
+top:110px;
+right:100px;     参考点为右上角
+
+bottom:110px;
+left: 100px;       参考点为左下角
+
+bottom:110px;
+right: 100px;    参考点为 右下角
+b、祖先元素作为参考元素
+如果祖先元素中有定位的元素，元素绝对定位的参考元素就是距离它最近的有定位的祖先元素。
+补充：绝对定位元素的参考盒子，可以是相对定位，也可以是绝对定位，还可以是固定定位。
+子绝父相：子元素是绝对定位，参考的祖先元素是相对定位。
+子绝父绝：子元素是绝对定位，参考的祖先元素是绝对定位。
+子绝父固：子元素是绝对定位，参考的祖先元素是固定定位。
+只要祖先元素中有任何一种定位，距离该子元素最近，它就是定位参考元素。
+子绝父相方法最为常用：相对定位的元素不会脱离标准流，结构稳定，对于当参考物来说比较方便。
+c、祖先元素参考时的参考点
+四个角，具体看所加属性方向，会忽视我们祖先元素的padding区域，以border内部的四个顶点作为相应方向的参考。
+相应方向：与使用的定位偏移方向一致。
+d、制作压盖效果
+用绝对定位制作压盖效果。（自己尝试）
+e、用绝对定位制作居中效果
+制作简易轮播图
+小技巧：如果文字被包裹在a标签里，底部会有3像素的间距，解决方法，将图片砖块。
+display：block(别问为什么就这么做)
+css3制作圆角：border-radius：10px;
+补充：cursor: pointer;/*鼠标变成小手*/
+
+3、固定定位
+固定定位，参考我们的浏览器窗口进行定位。
+属性值：fixed
+始终保持针对浏览器窗口某一个顶点位置相对不变。
+也有四个方向的偏移量的值：left、right、top、bottom。
+                        position: fixed;
+                        right: 100px;
+	        bottom: 100px;
+4、压盖顺序z-index
+默认压盖顺序：
+a、有定位的压盖没有定位的。
+b、有定位的元素，不区分定位类型，只要html结构写在后面的压盖写在前面。
+自定义压盖顺序：
+属性：z-index,压盖顺序。
+属性值：数字，没有任何单位，数值越大，压盖数值小的。
+a、只能给定位的元素加，其他的标准流的或者浮动元素都没有z-index属性。
+默认的定位元素的z-index值是1；
+b、属性值越大，会压盖属性值越小的。
+c、如果属性值相同，看html结构书写顺序，后面的压盖前面的。
+d、父子盒模型里，如果父子都有定位，都有自定义的z-index值，两对父子对比时，不管子元素的属性值多大，只要父亲z-index值小，就只能被压盖，子级再大，都不管用。

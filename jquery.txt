@@ -1,0 +1,107 @@
+方法1、jQuery效果-隐藏显示
+$(selector).hide(speed,callback);
+$(selector).show(speed,callback);
+$(selector).toggle(speed,callback);
+
+方法2、jQuery 效果 - 淡入淡出
+$(selector).fadeIn(speed,callback);
+$(selector).fadeOut(speed,callback);
+$(selector).fadeToggle(speed,callback);
+$(selector).fadeTo(speed,opacity,callback);
+
+方法3、jQuery 效果 - 滑动
+$(selector).slideDown(speed,callback);
+$(selector).slideUp(speed,callback);
+$(selector).slideToggle(speed,callback);
+
+方法4、jQuery 效果 - 动画
+$(selector).animate({params},speed,callback);
+
+方法5、jQuery 停止动画
+$(selector).stop(stopAll,goToEnd);
+
+方法6、jQuery Callback 函数
+
+方法7、jQuery - Chaining
+
+方法8、jQuery - 获得内容和属性
+text() - 设置或返回所选元素的文本内容
+html() - 设置或返回所选元素的内容（包括 HTML 标记）
+val() - 设置或返回表单字段的值
+attr() 方法用于获取属性值。
+
+方法9、jQuery - 设置内容和属性
+
+方法10、jQuery - 添加元素
+append() - 在被选元素的结尾插入内容
+prepend() - 在被选元素的开头插入内容
+after() - 在被选元素之后插入内容
+before() - 在被选元素之前插入内容
+
+方法10、jQuery - 删除元素
+remove() - 删除被选元素（及其子元素）
+empty() - 从被选元素中删除子元素
+
+方法11、jQuery - 获取并设置 CSS 类
+addClass() - 向被选元素添加一个或多个类
+removeClass() - 从被选元素删除一个或多个类
+toggleClass() - 对被选元素进行添加/删除类的切换操作
+
+方法12、jQuery - css() 方法
+css() 方法设置或返回被选元素的一个或多个样式属性。
+
+方法13、jQuery - 尺寸
+width()（当前元素的宽度）
+height()（当前元素的高度）
+innerWidth()（当前元素的宽度含内边距）
+innerHeight()（当前元素的高度含内边距）
+outerWidth()（当前元素的宽度含内边距和边框）
+outerHeight()（当前元素的宽度含内边距和边框）
+outerWidth(true)（当前元素的宽度含内边距和边框和外边距）
+outerHeight(true)（当前元素的宽度含内边距和边框和外边距）
+
+方法14、jQuery 遍历 - 祖先
+parent()（返回被选元素的直接父元素）
+parents()（返回被选元素的所有祖先元素）
+parents("ul")（返回被选元素的所有祖先元素,并且它是<ul>元素)
+parentsUntil()（返回介于两个给定元素之间的所有祖先元素。）
+
+方法15、jQuery 遍历 - 后代
+children()（返回被选元素的所有直接子元素）
+children("p.t1")（返回被选元素的类名为t1的所有直接p元素）
+find("span")（返回被选元素的后代的所有span元素）
+find("*")（返回被选元素的所有后代元素，一路向下直到最后一个后代）
+
+方法16、jQuery 遍历 - 同胞
+siblings()（返回被选元素的所有同胞元素）
+next()（返回被选元素的下一个同胞元素）
+nextAll()（返回被选元素的所有跟随的同胞元素）
+nextUntil()（返回介于两个给定参数之间的所有跟随的同胞元素）
+prev() （返回被选元素的下一个同胞元素）
+prevAll() （返回被选元素的所有跟随的同胞元素）
+prevUntil()（返回介于两个给定参数之间的所有跟随的同胞元素）（暂时不理解）
+
+方法16、jQuery 遍历 - 过滤
+first() 方法返回被选元素的首个元素。
+last() 方法返回被选元素的最后一个元素。
+eq() 方法返回被选元素中带有指定索引号的元素。
+ilter() 方法允许您规定一个标准。不匹配这个标准的元素会被从集合中删除，匹配的元素会被返回。
+not() 方法返回不匹配标准的所有元素。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
